@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string("name", 100)->unique();
             $table->text("activity");
+            $table->string("user_id", 100)->unique();
+            $table->string("user_name", 100);
+            
             $table->timestamps();
         });
     }
