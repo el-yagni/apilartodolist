@@ -42,7 +42,7 @@ class VideoController extends Controller
         if ($request->file) {
             $fileName = hash("sha256", "abcdefghijklmnopqrstuvwxyz");
             $extensionz = $request->file->extension();
-            $request['url'] = './storage/'.$fileName.".".$extensionz;
+            $request['url'] = 'https://apilartodolist.vercel.app/storage/'.$fileName.".".$extensionz;
             Storage::putFileAs('public', $request->file, $fileName.".".$extensionz);
         }
         
