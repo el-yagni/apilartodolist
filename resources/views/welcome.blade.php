@@ -47,7 +47,7 @@
     </header>
 
     <main>
-        <h3>HUAY UPDATES</h3>
+        <h3>HUAY UPDATES ke 2 bro</h3>
         <p>Welcome Employee Api Engineer of Lartodolist Company We Should to Making something amazing Here!</p>
         <p>Building with dream and keep fighting in the world</p>
     </main>
