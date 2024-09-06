@@ -42,7 +42,7 @@ class VideoController extends Controller
             $fileName = hash("sha256", "abcdefghijklmnopqrstuvwxyz");
             $extensionz = $request->file->extension();
             $request['url'] = $fileName.".".$extensionz;
-            Storage::putFileAs('room', $request->file, $fileName.".".$extensionz);
+            Storage::putFileAs('public', $request->file, $fileName.".".$extensionz);
         }
         
         
