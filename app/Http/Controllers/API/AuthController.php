@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
-use PhpParser\Token;
 use Validator;
+
 
 
 
@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "name" => "required",
+            "name" => "required|email",
             "email" => "required|email|unique:users,email",
             "password" => "required",
             "confirm_password" => "required|same:password"
