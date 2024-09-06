@@ -39,9 +39,6 @@ class AuthController extends Controller
         $input['password'] = bcrypt($input['password']);
 
         User::create($input);
-
-
-
         return response()->json([
             'success' => true,
             'message' => 'Sukses Registrasi',
