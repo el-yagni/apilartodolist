@@ -33,6 +33,7 @@ class VideoController extends Controller
         $validator = Validator::make($request->all(), [
             "title" => "required",
             "description" => "required",
+            "file" => "mimetypes:video/avi,video/mp4,video/mpeg",
             "user_id" => "required",
             "user_name" => "required"
         ]);
