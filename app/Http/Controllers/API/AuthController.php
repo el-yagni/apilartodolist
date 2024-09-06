@@ -17,33 +17,34 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            "name" => "required|alpha",
+        $validators = Validator::make($request->all(), [
+            "name" => "required",
             "email" => "required|email|unique:users,email",
-            "password" => "required|password",
+            "password" => "required",
             "confirm_password" => "required|same:password"
         ]);
 
 
-        if ($validator->fails()) {
+        if ($validators->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Ada kesalahan input',
-                'status' => $validator->failed(),
-                'data' => $validator->errors()
+                'data' => $validators->errors()
             ]);
         }
 
 
 
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        User::create($input);
-        return response()->json([
-            'success' => true,
-            'message' => 'Sukses Registrasi',
-            'status' => 200,
-        ], 200);
+        if($input) {
+            $input['password'] = bcrypt($input['password']);
+            User::create($input);
+            return response()->json([
+                'success' => true,
+                'message' => 'Sukses Registrasi',
+                'status' => 200,
+            ], 200);
+        }
     }
 
     public function deleteUser($id)
