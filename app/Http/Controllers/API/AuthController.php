@@ -35,9 +35,9 @@ class AuthController extends Controller
         }
 
 
+
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-
         User::create($input);
         return response()->json([
             'success' => true,
@@ -67,10 +67,11 @@ class AuthController extends Controller
 
     }
 
-    public function search($id) {
+    public function search($id)
+    {
         $data = User::find($id);
 
-        if(empty($data)) {
+        if (empty($data)) {
             return response()->json([
                 "status" => false,
                 "message" => "User Not Found"
@@ -123,7 +124,8 @@ class AuthController extends Controller
     }
 
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
         return response()->json([
             "status" => true,
