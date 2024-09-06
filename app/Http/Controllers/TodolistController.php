@@ -92,13 +92,13 @@ class TodolistController extends Controller
         $data = todolist::find($id);
         if (!$data) {
             return response()->json([
-                "status" => 404,
+                "status" => false,
                 "message" => "Data List Not Found"
             ], 404);
         } else {
             $data->delete();
             return response()->json([
-                "status" => 200,
+                "status" => true,
                 "message" => "Data successfully Deleted"
             ], 200);
         }
