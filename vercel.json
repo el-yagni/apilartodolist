@@ -8,11 +8,11 @@
     "routes": [
         {
             "src": "/storage/(.*)",
-            "dest": "./public/storage/"
+            "dest": "public/storage/"
         },
         {
             "src": "/img/(.*)",
-            "dest": "/public/img/"
+            "dest": "public/img/"
         },
         {
             "src": "/(.*)",
