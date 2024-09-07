@@ -12,7 +12,7 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $video = Video::all();
+        $video = Video::orderBy('id', 'desc')->get();
 
         if (!$video) {
             return response()->json([
