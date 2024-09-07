@@ -47,8 +47,8 @@ class VideoController extends Controller
         $file = $request->file('file');
         $data->user_id = $request->user_id;
         $data->user_name = $request->user_name;
-        if (Storage::disk('public')->put('video' . "", $file)) {
-            $data->url = 'https://apilartodolist.vercel.app/storage/video/'.$fileName.".".$extensionz;
+        if (Storage::disk('public')->put("" . "", $file)) {
+            $data->url = 'https://apilartodolist.vercel.app/storage/'.$fileName.".".$extensionz;
             $data->save();
             return response()->json([
                 "status" => true,
