@@ -30,6 +30,7 @@ class VideoController extends Controller
 
     public function store(Request $request)
     {
+        $data = new Video();
         $validator = Validator::make($request->all(), [
             "title" => "required",
             "description" => "required",
@@ -38,30 +39,31 @@ class VideoController extends Controller
             "user_name" => "required"
         ]);
 
-
-        if ($request->file) {
-            $fileName = hash("sha256", "abcdefghijklmnopqrstuvwxyz");
-            $extensionz = $request->file->extension();
-            $request['url'] = 'https://apilartodolist.vercel.app/storage/'.$fileName.".".$extensionz;
-            Storage::putFileAs('public', $request->file, $fileName.".".$extensionz);
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $fileName = hash("sha256", "abcdefghijklmnopqrstuvwxyz");
+        $extensionz = $request->file->extension();
+        
+        $file = $request->file('file');
+        $data->user_id = $request->user_id;
+        $data->user_name = $request->user_name;
+        if (Storage::disk('public')->put('main/' . "video", $file)) {
+            $data->url = 'https://apilartodolist.vercel.app/storage/'.$fileName.".".$extensionz;
+            $data->save();
+            return response()->json([
+                "status" => true,
+                "message" => "Success add Videos",
+            ]);
         }
-        
-        
         if ($validator->fails()) {
             return response()->json([
                 "status" => false,
                 "message" => $validator->failed(),
-                "data" => $validator->errors()
             ], 301);
         }
-
         
 
-        Video::create($request->all());
-        return response()->json([
-            "status" => true,
-            "message" => "Success add Videos",
-        ]);
+        
 
     }
 
