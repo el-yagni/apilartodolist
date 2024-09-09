@@ -19,8 +19,8 @@ Route::get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register']);
 Route::delete("delete/{id}", [AuthController::class, 'deleteUser'])->middleware('verified');
 Route::post('login', [AuthController::class, 'login']);
-Route::get('user/{id}', [AuthController::class, 'search'])->middleware('auth:sanctum');
-Route::post('user/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('user/{id}', [AuthController::class, 'search'])->middleware('auth:sanctum')->middleware('verified');
+Route::post('user/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->middleware('verified');
 
 
 
@@ -47,4 +47,4 @@ Route::put('v1/{id}', [TodolistController::class, 'Update'])->middleware(['auth:
 
 
 Route::get('video', [VideoController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
-Route::post('video', [VideoController::class, 'store'])->middleware('auth:sanctum');
+Route::post('video', [VideoController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
