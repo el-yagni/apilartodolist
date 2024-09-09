@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
 use Validator;
 
 
@@ -36,12 +37,12 @@ class AuthController extends Controller
 
 
         $input = $request->all();
-        if($input) {
+        if ($input) {
             $input['password'] = bcrypt($input['password']);
-            User::create($input);
+            User::create($input)->sendEmailVerificationNotification();
             return response()->json([
                 'success' => true,
-                'message' => 'Sukses Registrasi',
+                'message' => 'Sukses Registrasi, Silahkan lakukan verifikasi email!',
                 'status' => 200,
             ], 200);
         }
@@ -111,6 +112,7 @@ class AuthController extends Controller
             ], 400);
         }
 
+
         $tokenUser = $request->user()->createToken('token')->plainTextToken;
         $id = $request->user()->id;
         $name = $request->user()->name;
@@ -122,6 +124,48 @@ class AuthController extends Controller
             "message" => "Login Successfully",
             "token" => $tokenUser
         ], 200);
+    }
+
+
+    public function verify(Request $request, $id)
+    {
+        if (!$request->hasValidSignature()) {
+            return response()->json([
+                "status" => false,
+                "message" => "email verifying Fails!"
+            ]);
+        }
+
+        $user = User::find($id);
+
+        if (!$user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
+        }
+        return redirect('/success');
+    }
+
+    public function notice()
+    {
+        return response()->json([
+            "status" => false,
+            "message" => "anda belum melakukan Verifikasi email!"
+        ]);
+    }
+
+    public function resend()
+    {
+        if (Auth::user()->hasVerifiedEmail()) {
+            return response()->json([
+                "status" => true,
+                "message" => "Email Has been verified"
+            ]);
+        }
+
+        Auth::user()->sendEmailVerificationNotification();
+        return response()->json([
+            "status" => true,
+            "message" => "Your Resend Request has been send to Gmail"
+        ]);
     }
 
 
