@@ -31,7 +31,7 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Ada kesalahan input',
                 'data' => $validators->errors()
-            ]);
+            ], 400);
         }
 
 
@@ -177,5 +177,35 @@ class AuthController extends Controller
             "status" => true,
             "message" => "Logout Successfully"
         ], 200);
+    }
+
+    public function uploadImage(Request $request, $id) {
+        $user = User::find($id);
+
+        $file = $request->file('image');
+
+        if($request->hasFile('image')) {
+            $filename = hash("sha256", rand(1, 20)) .".". $file->getClientOriginalExtension();
+            $user->image = 'https://apilartodolist.vercel.app/image/' . $filename;
+            $file->move('image/', $filename);
+
+            $user->save();
+
+            return response()->json([
+                "status" => true,
+                "message" => "Success Upload Image"
+            ]);
+        }
+    }
+
+
+    public function showUserImage($id) {
+        $user = User::find($id, "image");
+
+        return response()->json([
+            "status" => true,
+            "image" => $user
+        ]);
+        
     }
 }

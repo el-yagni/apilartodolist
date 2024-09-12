@@ -17,10 +17,12 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('register', [AuthController::class, 'register']);
-Route::delete("delete/{id}", [AuthController::class, 'deleteUser'])->middleware('verified');
+Route::delete("delete/{id}", [AuthController::class, 'deleteUser'])->middleware(['auth:sanctum','verified']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('user/{id}', [AuthController::class, 'search'])->middleware('auth:sanctum')->middleware('verified');
-Route::post('user/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->middleware('verified');
+Route::get('user/{id}', [AuthController::class, 'search'])->middleware(['auth:sanctum', 'verified']);
+Route::post('user/logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum', 'verified']);
+Route::post('upload/{id}', [AuthController::class, 'uploadImage'])->middleware(['auth:sanctum', 'verified']);
+Route::get('user/image/{id}', [AuthController::class, 'showUserImage'])->middleware(['auth:sanctum', 'verified']);
 
 
 

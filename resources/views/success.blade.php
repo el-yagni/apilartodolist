@@ -27,7 +27,7 @@
 <body>
     <div class="container">
         <h1>Congratulations! 🎉🎉</h1>
-        <p>Your Email has been Veryfied! Now you can exit this page...</p>
+        <p>Your Email has been Verified! Now you can exit this page...</p>
     </div>
 </body>
 </html>
