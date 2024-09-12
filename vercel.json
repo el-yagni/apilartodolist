@@ -11,8 +11,8 @@
             "dest": "public/videos/"
         },
         {
-            "src": "/img/(.*)",
-            "dest": "public/img/"
+            "src": "/image/(.*)",
+            "dest": "public/image/"
         },
         {
             "src": "/(.*)",
