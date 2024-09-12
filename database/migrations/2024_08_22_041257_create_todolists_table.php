@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("name", 100);
             $table->text("activity");
             $table->string("user_id", 100);
+            $table->string("user_profile", 100)->nullable();
             $table->string("user_name", 100);
             $table->timestamps();
         });

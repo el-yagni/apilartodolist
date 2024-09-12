@@ -13,6 +13,7 @@ class todolist extends Model
         'name',
         'activity',
         'user_id',
+        'user_profile',
         'user_name'
     ];
 }
