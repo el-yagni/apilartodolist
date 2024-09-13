@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+use Storage;
 use Validator;
 
 
@@ -185,9 +186,9 @@ class AuthController extends Controller
 
         if($request->hasFile('image')) {
             $filename = hash("sha256", rand(1, 20)) .".". $file->getClientOriginalExtension();
-            $user->image = 'https://apilartodolist.vercel.app/image/' . $filename;
-            $file->move('image/', $filename);
-
+            $user->image = 'https://apilartodolist.vercel.app/storage/profile/' . $filename;
+            Storage::putFileAs('public/profile', $file, $filename);
+            
             $user->save();
 
             return response()->json([
