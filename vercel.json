@@ -8,11 +8,11 @@
     "routes": [
         {
             "src": "/videos/(.*)",
-            "dest": "public/videos/"
+            "dest": "storage/videos/"
         },
         {
             "src": "/image/(.*)",
-            "dest": "public/image/"
+            "dest": "storage/profile/"
         },
         {
             "src": "/(.*)",
