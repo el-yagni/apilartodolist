@@ -24,8 +24,6 @@ Route::post('user/logout', [AuthController::class, 'logout'])->middleware(['auth
 Route::put('upload/{id}', [AuthController::class, 'uploadImage'])->middleware(['auth:sanctum', 'verified']);
 Route::get('user/image/{id}', [AuthController::class, 'showUserImage'])->middleware(['auth:sanctum', 'verified']);
 
-
-
 Route::get('/', function() {
 
     return response()->json([
