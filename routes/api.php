@@ -21,7 +21,7 @@ Route::delete("delete/{id}", [AuthController::class, 'deleteUser'])->middleware(
 Route::post('login', [AuthController::class, 'login']);
 Route::get('user/{id}', [AuthController::class, 'search'])->middleware(['auth:sanctum', 'verified']);
 Route::post('user/logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum', 'verified']);
-Route::put('upload/{id}', [AuthController::class, 'uploadImage'])->middleware(['auth:sanctum', 'verified']);
+Route::post('upload/{id}', [AuthController::class, 'uploadImage'])->middleware(['auth:sanctum', 'verified']);
 Route::get('user/image/{id}', [AuthController::class, 'showUserImage'])->middleware(['auth:sanctum', 'verified']);
 
 Route::get('/', function() {
@@ -39,9 +39,6 @@ Route::get('v1/{id}', [TodolistController::class, 'findList'])->middleware(['aut
 Route::post('v1/', [TodolistController::class, 'addList'])->middleware(['auth:sanctum', 'verified']);
 Route::delete('v1/{id}', [TodolistController::class, 'deleteList'])->middleware(['auth:sanctum', 'verified']);
 Route::put('v1/{id}', [TodolistController::class, 'Update'])->middleware(['auth:sanctum', 'verified']);
-
-
-
 
 
 
